@@ -15,18 +15,37 @@ jobs:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           persist-credentials: false
+      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
+        with:
+          python-version: "3.12"
       - name: Local-only files are never tracked
         run: |
-          if git ls-files | grep -qiE '^(IDENTITY\.md|graph\.local\.json|\.IDENTITY\.md\.sha256)$'; then
+          if git ls-files | grep -qiE '^(IDENTITY\.md|graph\.local\.json)$'; then
             echo "a local-only file is tracked"; exit 1
           fi
       - name: Tests
         run: |
-          python3 -I tools/test_build.py
-          python3 -I tools/test_triage.py
+          python -I tools/test_build.py
+          python -I tools/test_triage.py
       - name: Build (validates graph, refuses secret-like content)
-        run: python3 -I build.py
+        run: python -I build.py
       - name: docs/ matches the sources
         run: |
           git add -N docs
           git diff --exit-code -- docs || { echo "docs/ is stale: run ./build.py and commit"; exit 1; }
+      - name: install.sh links, keeps backups and restores them
+        run: |
+          set -eu
+          h="$(mktemp -d)"
+          mkdir -p "$h/.claude" "$h/.gemini"
+          echo "original rules" > "$h/.claude/CLAUDE.md"
+          ln -s /etc/hostname "$h/.gemini/GEMINI.md"
+          HOME="$h" ./install.sh
+          HOME="$h" ./install.sh | grep -c '^ok: /' | grep -qx 4
+          for t in .claude/CLAUDE.md .gemini/GEMINI.md .codex/AGENTS.md .config/opencode/AGENTS.md; do
+            [ "$(readlink "$h/$t")" = "$PWD/IDENTITY.md" ]
+          done
+          HOME="$h" ./install.sh --uninstall
+          [ "$(cat "$h/.claude/CLAUDE.md")" = "original rules" ]
+          [ "$(readlink "$h/.gemini/GEMINI.md")" = /etc/hostname ]
+          [ ! -e "$h/.codex/AGENTS.md" ] && [ ! -L "$h/.codex/AGENTS.md" ]

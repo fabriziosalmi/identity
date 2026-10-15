@@ -1,4 +1,5 @@
 {
+  "schema_version": 1,
   "id": "security-suite",
   "type": "project",
   "label": "Security tooling",

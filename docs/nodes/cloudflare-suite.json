@@ -1,4 +1,5 @@
 {
+  "schema_version": 1,
   "id": "cloudflare-suite",
   "type": "project",
   "label": "Cloudflare and EU sovereignty tooling",

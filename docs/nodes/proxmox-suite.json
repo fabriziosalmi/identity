@@ -1,4 +1,5 @@
 {
+  "schema_version": 1,
   "id": "proxmox-suite",
   "type": "project",
   "label": "Proxmox and self-hosting tooling",

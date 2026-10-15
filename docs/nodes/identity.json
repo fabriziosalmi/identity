@@ -1,4 +1,5 @@
 {
+  "schema_version": 1,
   "id": "identity",
   "type": "project",
   "label": "This identity graph",

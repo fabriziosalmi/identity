@@ -1,4 +1,5 @@
 {
+  "schema_version": 1,
   "id": "l-github",
   "type": "link",
   "label": "GitHub",

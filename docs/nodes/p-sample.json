@@ -1,4 +1,5 @@
 {
+  "schema_version": 1,
   "id": "p-sample",
   "type": "preference",
   "label": "Sample first, then scale",

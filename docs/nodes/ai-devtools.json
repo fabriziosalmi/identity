@@ -1,4 +1,5 @@
 {
+  "schema_version": 1,
   "id": "ai-devtools",
   "type": "project",
   "label": "AI developer tooling (l0 family and friends)",

@@ -1,4 +1,5 @@
 {
+  "schema_version": 1,
   "id": "p-public-text",
   "type": "preference",
   "label": "Public text",

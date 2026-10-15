@@ -1,4 +1,5 @@
 {
+  "schema_version": 1,
   "id": "p-multiagent",
   "type": "preference",
   "label": "Multi-agent setup",

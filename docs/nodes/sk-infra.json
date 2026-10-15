@@ -1,4 +1,5 @@
 {
+  "schema_version": 1,
   "id": "sk-infra",
   "type": "skill",
   "label": "Infrastructure",

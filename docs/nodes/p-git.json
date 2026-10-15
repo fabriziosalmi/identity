@@ -1,4 +1,5 @@
 {
+  "schema_version": 1,
   "id": "p-git",
   "type": "preference",
   "label": "Git hygiene",

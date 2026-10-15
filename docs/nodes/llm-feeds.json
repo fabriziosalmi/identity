@@ -1,4 +1,5 @@
 {
+  "schema_version": 1,
   "id": "llm-feeds",
   "type": "project",
   "label": "LLM content experiments",

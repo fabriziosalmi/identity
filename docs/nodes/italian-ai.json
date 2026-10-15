@@ -1,4 +1,5 @@
 {
+  "schema_version": 1,
   "id": "italian-ai",
   "type": "project",
   "label": "Italian-language AI",

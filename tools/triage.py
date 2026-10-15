@@ -11,6 +11,8 @@ import sys
 from pathlib import Path
 
 ASKS = Path(__file__).resolve().parent.parent / "docs" / "asks.json"
+MAX_BODY = 12000
+# Must match the labels in .github/ISSUE_TEMPLATE/agent-feedback.yml (tested).
 FIELDS = {
     "node": "Node",
     "proposal": "Proposal",
@@ -51,7 +53,12 @@ def sections(body):
 
 
 def decide(issue, asks):
+    """Reasons only ever contain our own text: nothing the author wrote is
+    echoed back, so the bot's comment cannot be used to publish their content."""
     body = issue.get("body") or ""
+    # Cap before any parsing or regex work.
+    if len(body) > MAX_BODY:
+        return {"pass": False, "node": "", "reasons": [f"issue is longer than {MAX_BODY} characters"]}
     s = sections(body)
     reasons = []
     get = lambda f: "" if s.get(FIELDS[f], "") in ("", "_No response_") else s[FIELDS[f]]
@@ -62,13 +69,12 @@ def decide(issue, asks):
     open_nodes = {a["node"] for a in asks["open"]}
     node = get("node").strip().strip("`").lower()
     if node and node not in open_nodes:
-        reasons.append(f"node '{node}' has no open ask (open: {', '.join(sorted(open_nodes))})")
+        reasons.append(f"the Node field is not an id with an open ask (open: {', '.join(sorted(open_nodes))})")
+        node = ""
 
     proposal, evidence = get("proposal"), get("evidence")
     if proposal and not 80 <= len(proposal) <= 4000:
         reasons.append("proposal must be 80 to 4000 characters")
-    if len(body) > 12000:
-        reasons.append("issue is longer than 12000 characters")
     if evidence and not any(re.search(p, evidence) for p in EVIDENCE):
         reasons.append("evidence has no file:line, code block, URL, endpoint or measurement")
 

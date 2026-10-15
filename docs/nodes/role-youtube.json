@@ -1,4 +1,5 @@
 {
+  "schema_version": 1,
   "id": "role-youtube",
   "type": "role",
   "label": "YouTube partner (2014 to 2019)",

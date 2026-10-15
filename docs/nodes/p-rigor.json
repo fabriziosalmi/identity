@@ -1,4 +1,5 @@
 {
+  "schema_version": 1,
   "id": "p-rigor",
   "type": "preference",
   "label": "Draconian rigor",

@@ -1,4 +1,5 @@
 {
+  "schema_version": 1,
   "id": "music-software",
   "type": "project",
   "label": "Music software",

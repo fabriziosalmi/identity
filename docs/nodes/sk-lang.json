@@ -1,4 +1,5 @@
 {
+  "schema_version": 1,
   "id": "sk-lang",
   "type": "skill",
   "label": "Languages and frameworks",

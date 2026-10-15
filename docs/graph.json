@@ -3,7 +3,8 @@
     "title": "Fabrizio Salmi (fab): identity context",
     "intro": "Context about the person you are working with. Use it to adapt language, rigor and defaults. Project files (AGENTS.md, CLAUDE.md) in the current repo take precedence over this.",
     "updated": "2026-10-15",
-    "schema": "nodes: {id, type, label, text?, url?, ask?}; edges: {from, rel, to}"
+    "schema": "nodes: {id, type, label, text?, url?, ask?}; edges: {from, rel, to}",
+    "schema_version": 1
   },
   "nodes": [
     {

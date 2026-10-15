@@ -14,12 +14,14 @@ ours() { [ -L "$1" ] && [ "$(readlink "$1")" = "$src" ]; }
 if [ "${1:-}" = "--uninstall" ]; then
   for t in $targets; do
     ours "$t" || continue
-    rm "$t"
-    echo "unlinked: $t"
     last="$(ls -1t "$t".bak.* 2>/dev/null | head -n 1 || true)"
     if [ -n "$last" ]; then
-      mv "$last" "$t"
+      # rename over the link: the target is never missing in between
+      mv -f "$last" "$t"
       echo "restored: $t <- $last"
+    else
+      rm "$t"
+      echo "unlinked: $t"
     fi
   done
   exit 0

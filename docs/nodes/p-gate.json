@@ -1,4 +1,5 @@
 {
+  "schema_version": 1,
   "id": "p-gate",
   "type": "preference",
   "label": "Ask before outward actions",

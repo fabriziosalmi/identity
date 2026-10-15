@@ -28,8 +28,11 @@ jobs:
           GH_REPO: ${{ github.repository }}
           NUMBER: ${{ github.event.issue.number }}
           STATE: ${{ github.event.issue.state }}
+          AUTO_CLOSED: ${{ contains(github.event.issue.labels.*.name, 'auto-closed') }}
         run: |
           set -eu
+          # A close by a human is final: only the bot's own closes are revisited.
+          if [ "$STATE" = closed ] && [ "$AUTO_CLOSED" != true ]; then exit 0; fi
           if jq -e .pass decision.json >/dev/null; then
             if [ "$STATE" = closed ]; then gh issue reopen "$NUMBER"; fi
             gh issue edit "$NUMBER" --add-label triage --remove-label auto-closed

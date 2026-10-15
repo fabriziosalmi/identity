@@ -1,4 +1,5 @@
 {
+  "schema_version": 1,
   "id": "l-hf",
   "type": "link",
   "label": "Hugging Face",

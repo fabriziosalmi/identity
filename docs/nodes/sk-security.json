@@ -1,4 +1,5 @@
 {
+  "schema_version": 1,
   "id": "sk-security",
   "type": "skill",
   "label": "Security",

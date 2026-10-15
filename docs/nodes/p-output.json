@@ -1,4 +1,5 @@
 {
+  "schema_version": 1,
   "id": "p-output",
   "type": "preference",
   "label": "Short verdicts, numbered choices",

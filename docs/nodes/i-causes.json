@@ -1,4 +1,5 @@
 {
+  "schema_version": 1,
   "id": "i-causes",
   "type": "interest",
   "label": "Causes",

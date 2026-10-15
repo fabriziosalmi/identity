@@ -1,4 +1,5 @@
 {
+  "schema_version": 1,
   "id": "role-sorint",
   "type": "role",
   "label": "SORINT.lab (2018 to 2019)",

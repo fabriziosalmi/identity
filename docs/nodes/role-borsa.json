@@ -1,4 +1,5 @@
 {
+  "schema_version": 1,
   "id": "role-borsa",
   "type": "role",
   "label": "Borsa Italiana / Euronext (2019 to 2025)",

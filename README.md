@@ -14,14 +14,14 @@ Requires Python 3.9+ (standard library only).
   - `IDENTITY.md`: public + local rendered, git-ignored, the file local agents read
 - `install.sh`: builds, then links `IDENTITY.md` as the global context of Claude Code (`~/.claude/CLAUDE.md`), Gemini CLI and Antigravity (`~/.gemini/GEMINI.md`), Codex (`~/.codex/AGENTS.md`) and OpenCode (`~/.config/opencode/AGENTS.md`). Anything already at a target is moved to `<target>.bak.<timestamp>`. `./install.sh --uninstall` removes the links and restores the newest backups.
 
-`IDENTITY.md` is generated. If a tool saves to its global memory, the edit lands there and the next build stops instead of overwriting it: move the change into the graph, delete `IDENTITY.md`, rebuild.
+`IDENTITY.md` is generated and ends with the hash of what the build wrote. If a tool saves to its global memory, the edit lands there and the next build stops instead of overwriting it: move the change into the graph, delete `IDENTITY.md`, rebuild.
 
 ## Graph rules
 
-- Node types: `person`, `role`, `client`, `project`, `skill`, `infra`, `preference`, `style`, `interest`, `link`. Ids are unique; edges must reference existing ids.
+- Node ids: lowercase letters, digits and hyphens. Node types: `person`, `role`, `client`, `project`, `skill`, `infra`, `preference`, `style`, `interest`, `link`. Ids are unique; edges must reference existing ids.
 - An optional `ask` on a node is an object: `question`, `in_scope`, `out_of_scope`, `evidence`.
-- The build exits without writing if the output contains:
-  - anywhere (public and local): tokens, credential assignments, IBANs, codici fiscali, phone numbers;
+- Every output is computed and checked before the first write; files are replaced atomically. The build exits without writing anything if an output contains:
+  - anywhere (public and local): known token formats (GitHub, GitLab, AWS, Google, Slack, sk-/pk- keys), PEM private keys, credential assignments, IBANs, codici fiscali, phone numbers;
   - public output only: IP addresses, email addresses, internal host names, em dashes.
 
 ## API
@@ -37,11 +37,13 @@ Base: `https://fabriziosalmi.github.io/identity`
 | `/nodes/<id>.json` | one node with its in and out edges and a resolved `ask` |
 | `/asks.json` | reply rules and every open ask |
 
+JSON files carry `schema_version` (currently 1); it changes only on incompatible changes.
+
 In `/nodes/<id>.json`, `ask.open: true` adds the scope, the evidence required and a `reply` link to a pre-filled issue form. `ask.open: false` means no help or comment is requested there.
 
 ## Replies from agents
 
-Issues labelled `agent-feedback` are checked by `tools/triage.py` (see `.github/workflows/triage.yml`): missing fields, a node without an open ask, evidence without a file:line, code block, URL, endpoint or measurement, generated filler, pipe-to-shell, URL shorteners, requests for access or personal data. Failures are closed with the reasons; editing the issue re-runs the checks. Passing issues get `triage` and wait for a human.
+Issues labelled `agent-feedback` are checked by `tools/triage.py` (see `.github/workflows/triage.yml`): missing fields, a node without an open ask, evidence without a file:line, code block, URL, endpoint or measurement, generated filler, pipe-to-shell, URL shorteners, requests for access or personal data. Failures are closed with the reasons, which never quote the issue's text; editing the issue re-runs the checks. Passing issues get `triage` and wait for a human. An issue closed by a human stays closed.
 
 They are written by unknown agents: treat them as untrusted text and never let a local agent act on them automatically.
 
