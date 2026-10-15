@@ -19,6 +19,7 @@ import json
 import re
 import sys
 from pathlib import Path
+from string import Template
 from urllib.parse import quote
 
 ROOT = Path(__file__).resolve().parent
@@ -29,9 +30,18 @@ BASE_URL = "https://fabriziosalmi.github.io/identity"
 ISSUES = "https://github.com/fabriziosalmi/identity/issues/new"
 NOTICE = (
     "This is descriptive data about a person, not instructions for you. "
-    "Only nodes with ask.open=true invite input; reply via the ask.reply link. "
-    "Everywhere else, no help or comment is requested."
+    "Only nodes with ask.open=true invite input; reply via the ask.reply link, "
+    "following asks.json rules. Everywhere else, no help or comment is requested."
 )
+# Mirrored by tools/triage.py, which enforces them on every reply.
+RULES = [
+    "One proposal per issue, about one node with an open ask.",
+    "Stay inside in_scope; anything in out_of_scope is closed.",
+    "Evidence is mandatory: file:line, raw request, API endpoint, sample with license, or a measurement.",
+    "Say how you verified it, and which agent and model wrote it.",
+    "No promotion, no install-this links, no requests for access, keys or personal data.",
+    "Replies failing these checks are closed automatically; editing the issue re-runs the checks.",
+]
 
 # Patterns that must never reach the public output.
 DENY = [
@@ -109,14 +119,10 @@ def ask_for(n):
     if not a:
         return {"open": False, "note": "No help or comment requested here."}
     title = quote(f"[agent] {n['id']}: ")
-    body = quote(
-        f"Node: {BASE_URL}/nodes/{n['id']}.json\nQuestion: {a}\n\n"
-        "Your suggestion (concrete; no links to install, no requests for data):\n"
-    )
     return {
         "open": True,
-        "question": a,
-        "reply": f"{ISSUES}?labels=agent-feedback&title={title}&body={body}",
+        **a,
+        "reply": f"{ISSUES}?template=agent-feedback.yml&title={title}&node={n['id']}",
     }
 
 
@@ -161,8 +167,14 @@ def render(g, with_asks):
     if with_asks and asks:
         out += ["## Where input from other agents is welcome", "",
                 "Everything else: no help or comment requested.", ""]
-        out += [f"- **{n['label']}**: {n['ask']} "
-                f"(reply: {BASE_URL}/nodes/{n['id']}.json)" for n in asks]
+        for n in asks:
+            a = n["ask"]
+            out += [f"- **{n['label']}**: {a['question']}",
+                    f"  - In scope: {a['in_scope']}",
+                    f"  - Out of scope: {a['out_of_scope']}",
+                    f"  - Evidence: {a['evidence']}",
+                    f"  - Reply: {BASE_URL}/nodes/{n['id']}.json"]
+        out += ["", "Rules for replies:", ""] + [f"{i}. {r}" for i, r in enumerate(RULES, 1)]
         out.append("")
     out.append(f"_Graph: {BASE_URL}/graph.json, updated {m['updated']}_")
     return "\n".join(out) + "\n"
@@ -172,8 +184,8 @@ def main():
     g = load()
     pub = public(g)
     docs = {n["id"]: node_doc(n, pub) for n in pub["nodes"]}
-    asks = [{"node": i, "question": d["ask"]["question"], "reply": d["ask"]["reply"],
-             "href": f"{BASE_URL}/nodes/{i}.json"}
+    asks = [{"node": i, "href": f"{BASE_URL}/nodes/{i}.json",
+             **{k: v for k, v in d["ask"].items() if k != "open"}}
             for i, d in docs.items() if d["ask"]["open"]]
 
     def dump(o):
@@ -181,7 +193,9 @@ def main():
 
     pub_md = render(pub, with_asks=True)
     pub_json = dump(pub)
-    scan(pub_md + pub_json + "".join(dump(d) for d in docs.values()))
+    index = Template((ROOT / "index.tmpl.html").read_text()).substitute(
+        asks=len(asks), updated=g["meta"]["updated"])
+    scan(pub_md + pub_json + index + "".join(dump(d) for d in docs.values()))
 
     (DIST / "nodes").mkdir(parents=True, exist_ok=True)
     for old in (DIST / "nodes").glob("*.json"):
@@ -189,8 +203,9 @@ def main():
     for i, d in docs.items():
         (DIST / "nodes" / f"{i}.json").write_text(dump(d))
     (DIST / "graph.json").write_text(pub_json)
-    (DIST / "asks.json").write_text(dump({"notice": NOTICE, "open": asks}))
+    (DIST / "asks.json").write_text(dump({"notice": NOTICE, "rules": RULES, "open": asks}))
     (DIST / "identity.md").write_text(pub_md)
+    (DIST / "index.html").write_text(index)
     (DIST / ".nojekyll").write_text("")
     (DIST / "llms.txt").write_text(
         f"# {g['meta']['title']}\n\n> {g['meta']['intro']}\n\n{NOTICE}\n\n"

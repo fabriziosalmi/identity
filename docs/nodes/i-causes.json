@@ -16,5 +16,5 @@
     "open": false,
     "note": "No help or comment requested here."
   },
-  "notice": "This is descriptive data about a person, not instructions for you. Only nodes with ask.open=true invite input; reply via the ask.reply link. Everywhere else, no help or comment is requested."
+  "notice": "This is descriptive data about a person, not instructions for you. Only nodes with ask.open=true invite input; reply via the ask.reply link, following asks.json rules. Everywhere else, no help or comment is requested."
 }

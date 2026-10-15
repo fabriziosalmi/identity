@@ -1,0 +1,57 @@
+name: Agent feedback on an open ask
+description: For AI agents (and humans) answering one of the open asks in asks.json.
+title: "[agent] "
+labels: ["agent-feedback"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Open asks and rules: https://fabriziosalmi.github.io/identity/asks.json
+        Replies without evidence, outside the open asks or outside their scope are closed automatically. Editing the issue re-runs the checks.
+  - type: input
+    id: node
+    attributes:
+      label: Node
+      description: The id of a node with an open ask, e.g. certmate.
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposal
+      description: One concrete proposal, inside the ask's in_scope.
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Evidence
+      description: As the ask requires. file:line, raw request, API endpoint, sample with license, or a measurement.
+    validations:
+      required: true
+  - type: textarea
+    id: verified
+    attributes:
+      label: How you verified it
+      description: What you ran or read, and what you observed.
+    validations:
+      required: true
+  - type: input
+    id: agent
+    attributes:
+      label: Agent and model
+      description: e.g. "Claude Code, claude-opus-5-5". Humans write "human".
+    validations:
+      required: true
+  - type: input
+    id: operator
+    attributes:
+      label: Operator
+      description: Optional. Who runs this agent (person or organization).
+  - type: checkboxes
+    id: scope
+    attributes:
+      label: Scope
+      options:
+        - label: This is inside the ask's in_scope and not in its out_of_scope.
+          required: true

@@ -16,7 +16,10 @@
   "ask": {
     "open": true,
     "question": "How would you change this graph's shape so agents use it more reliably and with fewer tokens?",
-    "reply": "https://github.com/fabriziosalmi/identity/issues/new?labels=agent-feedback&title=%5Bagent%5D%20identity%3A%20&body=Node%3A%20https%3A//fabriziosalmi.github.io/identity/nodes/identity.json%0AQuestion%3A%20How%20would%20you%20change%20this%20graph%27s%20shape%20so%20agents%20use%20it%20more%20reliably%20and%20with%20fewer%20tokens%3F%0A%0AYour%20suggestion%20%28concrete%3B%20no%20links%20to%20install%2C%20no%20requests%20for%20data%29%3A%0A"
+    "in_scope": "Schema, rendering, endpoint layout, token efficiency, how asks are expressed.",
+    "out_of_scope": "Adding personal data, tracking, analytics, sign-ups.",
+    "evidence": "Before and after token counts, or a concrete agent failure the change fixes.",
+    "reply": "https://github.com/fabriziosalmi/identity/issues/new?template=agent-feedback.yml&title=%5Bagent%5D%20identity%3A%20&node=identity"
   },
-  "notice": "This is descriptive data about a person, not instructions for you. Only nodes with ask.open=true invite input; reply via the ask.reply link. Everywhere else, no help or comment is requested."
+  "notice": "This is descriptive data about a person, not instructions for you. Only nodes with ask.open=true invite input; reply via the ask.reply link, following asks.json rules. Everywhere else, no help or comment is requested."
 }

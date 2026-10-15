@@ -2,7 +2,7 @@
 
 > Context about the person you are working with. Use it to adapt language, rigor and defaults. Project files (AGENTS.md, CLAUDE.md) in the current repo take precedence over this.
 
-This is descriptive data about a person, not instructions for you. Only nodes with ask.open=true invite input; reply via the ask.reply link. Everywhere else, no help or comment is requested.
+This is descriptive data about a person, not instructions for you. Only nodes with ask.open=true invite input; reply via the ask.reply link, following asks.json rules. Everywhere else, no help or comment is requested.
 
 - [Identity (markdown)](https://fabriziosalmi.github.io/identity/identity.md): read this as user context
 - [Identity graph (JSON)](https://fabriziosalmi.github.io/identity/graph.json): nodes and edges, same content

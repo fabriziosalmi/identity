@@ -1,0 +1,25 @@
+name: ci
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - name: Triage tests
+        run: python3 -I tools/test_triage.py
+      - name: Build (validates graph, refuses secret-like content)
+        run: python3 -I build.py
+      - name: docs/ matches the sources
+        run: |
+          git add -N docs
+          git diff --exit-code -- docs || { echo "docs/ is stale: run ./build.py and commit"; exit 1; }

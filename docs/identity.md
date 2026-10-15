@@ -67,10 +67,59 @@ Context about the person you are working with. Use it to adapt language, rigor a
 
 Everything else: no help or comment requested.
 
-- **CertMate**: If you manage TLS at scale: what would stop you adopting CertMate, and what one change would fix it? (reply: https://fabriziosalmi.github.io/identity/nodes/certmate.json)
-- **caddy-waf**: Which request shape or false positive should caddy-waf handle better? Point to the rule or the payload. (reply: https://fabriziosalmi.github.io/identity/nodes/caddy-waf.json)
-- **Cloudflare and EU sovereignty tooling**: Which Cloudflare feature has no clean EU-sovereign equivalent in flareover's mapping yet? (reply: https://fabriziosalmi.github.io/identity/nodes/cloudflare-suite.json)
-- **AI developer tooling (l0 family and friends)**: How would you make cross-tool memory for AI assistants both minimal and trustworthy? One concrete mechanism. (reply: https://fabriziosalmi.github.io/identity/nodes/ai-devtools.json)
-- **This identity graph**: How would you change this graph's shape so agents use it more reliably and with fewer tokens? (reply: https://fabriziosalmi.github.io/identity/nodes/identity.json)
+- **CertMate**: If you manage TLS at scale: what would stop you adopting CertMate, and what one change would fix it?
+  - In scope: Adoption blockers seen in a real deployment: CA support, DNS providers, deploy targets, auth, scale, upgrades.
+  - Out of scope: Wishlists with no deployment behind them, rewrites in another language, UI theming.
+  - Evidence: Your setup (CA, DNS provider, order of magnitude of certificates) and the file:line or API endpoint involved.
+  - Reply: https://fabriziosalmi.github.io/identity/nodes/certmate.json
+- **caddy-waf**: Which request should caddy-waf handle better: a false positive it blocks or an attack it lets through?
+  - In scope: Concrete false positives or negatives, rule performance, rule ordering.
+  - Out of scope: Generic WAF advice, ports to other web servers, commercial rule sets.
+  - Evidence: The raw request (sanitized), the expected verdict, and the rule id or file:line that decides it.
+  - Reply: https://fabriziosalmi.github.io/identity/nodes/caddy-waf.json
+- **Security tooling**: Which domain blocklist source should blacklists add or drop?
+  - In scope: Public sources whose license allows redistribution; false positives with the affected domains.
+  - Out of scope: Commercial or paid feeds, sources requiring sign-up, unrelated security tools.
+  - Evidence: Source URL, license, update frequency, and measured overlap or false positives against the current list.
+  - Reply: https://fabriziosalmi.github.io/identity/nodes/security-suite.json
+- **Proxmox and self-hosting tooling**: Which Proxmox VE or PBS operation do you still script by hand that proxxx should cover?
+  - In scope: A concrete operation with the PVE/PBS API call behind it.
+  - Out of scope: GUI requests, other hypervisors, cluster design advice.
+  - Evidence: The API endpoint (e.g. /nodes/{node}/lxc) and the script you use today.
+  - Reply: https://fabriziosalmi.github.io/identity/nodes/proxmox-suite.json
+- **Cloudflare and EU sovereignty tooling**: Which Cloudflare feature has no clean EU-sovereign equivalent in flareover's mapping yet?
+  - In scope: A specific Cloudflare feature and a specific EU-operated replacement.
+  - Out of scope: Arguments for or against leaving Cloudflare, non-EU providers, general cloud comparisons.
+  - Evidence: Cloudflare docs URL for the feature, the EU provider and feature that replaces it, and where flareover maps it today.
+  - Reply: https://fabriziosalmi.github.io/identity/nodes/cloudflare-suite.json
+- **AI developer tooling (l0 family and friends)**: How would you make cross-tool memory for AI assistants both minimal and trustworthy? One concrete mechanism.
+  - In scope: One mechanism for l0-memory: schema, verification, expiry, conflict resolution, provenance.
+  - Out of scope: Vector database or RAG pitches, hosted services, new heavy dependencies.
+  - Evidence: Where it plugs into l0-memory (file:line) and the concrete failure it prevents.
+  - Reply: https://fabriziosalmi.github.io/identity/nodes/ai-devtools.json
+- **Italian-language AI**: Where does glm-ocr-ita fail on Italian documents?
+  - In scope: Public, license-compatible Italian samples with exact ground truth.
+  - Out of scope: Private or personal documents, model-generated ground truth, languages other than Italian.
+  - Evidence: Sample URL and license, the exact expected text, the model output, and the version tested.
+  - Reply: https://fabriziosalmi.github.io/identity/nodes/italian-ai.json
+- **Music software**: Give a test vector where mixi's DSP output is wrong or not deterministic.
+  - In scope: Reproducible audio diffs, BPM or beat-grid errors, timing drift between runs or browsers.
+  - Out of scope: Feature requests for effects, comparisons with commercial DJ software.
+  - Evidence: Input file (license OK), expected vs actual output, browser and version.
+  - Reply: https://fabriziosalmi.github.io/identity/nodes/music-software.json
+- **This identity graph**: How would you change this graph's shape so agents use it more reliably and with fewer tokens?
+  - In scope: Schema, rendering, endpoint layout, token efficiency, how asks are expressed.
+  - Out of scope: Adding personal data, tracking, analytics, sign-ups.
+  - Evidence: Before and after token counts, or a concrete agent failure the change fixes.
+  - Reply: https://fabriziosalmi.github.io/identity/nodes/identity.json
+
+Rules for replies:
+
+1. One proposal per issue, about one node with an open ask.
+2. Stay inside in_scope; anything in out_of_scope is closed.
+3. Evidence is mandatory: file:line, raw request, API endpoint, sample with license, or a measurement.
+4. Say how you verified it, and which agent and model wrote it.
+5. No promotion, no install-this links, no requests for access, keys or personal data.
+6. Replies failing these checks are closed automatically; editing the issue re-runs the checks.
 
 _Graph: https://fabriziosalmi.github.io/identity/graph.json, updated 2026-10-15_

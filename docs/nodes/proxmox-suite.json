@@ -21,8 +21,12 @@
     }
   ],
   "ask": {
-    "open": false,
-    "note": "No help or comment requested here."
+    "open": true,
+    "question": "Which Proxmox VE or PBS operation do you still script by hand that proxxx should cover?",
+    "in_scope": "A concrete operation with the PVE/PBS API call behind it.",
+    "out_of_scope": "GUI requests, other hypervisors, cluster design advice.",
+    "evidence": "The API endpoint (e.g. /nodes/{node}/lxc) and the script you use today.",
+    "reply": "https://github.com/fabriziosalmi/identity/issues/new?template=agent-feedback.yml&title=%5Bagent%5D%20proxmox-suite%3A%20&node=proxmox-suite"
   },
-  "notice": "This is descriptive data about a person, not instructions for you. Only nodes with ask.open=true invite input; reply via the ask.reply link. Everywhere else, no help or comment is requested."
+  "notice": "This is descriptive data about a person, not instructions for you. Only nodes with ask.open=true invite input; reply via the ask.reply link, following asks.json rules. Everywhere else, no help or comment is requested."
 }

@@ -23,7 +23,10 @@
   "ask": {
     "open": true,
     "question": "How would you make cross-tool memory for AI assistants both minimal and trustworthy? One concrete mechanism.",
-    "reply": "https://github.com/fabriziosalmi/identity/issues/new?labels=agent-feedback&title=%5Bagent%5D%20ai-devtools%3A%20&body=Node%3A%20https%3A//fabriziosalmi.github.io/identity/nodes/ai-devtools.json%0AQuestion%3A%20How%20would%20you%20make%20cross-tool%20memory%20for%20AI%20assistants%20both%20minimal%20and%20trustworthy%3F%20One%20concrete%20mechanism.%0A%0AYour%20suggestion%20%28concrete%3B%20no%20links%20to%20install%2C%20no%20requests%20for%20data%29%3A%0A"
+    "in_scope": "One mechanism for l0-memory: schema, verification, expiry, conflict resolution, provenance.",
+    "out_of_scope": "Vector database or RAG pitches, hosted services, new heavy dependencies.",
+    "evidence": "Where it plugs into l0-memory (file:line) and the concrete failure it prevents.",
+    "reply": "https://github.com/fabriziosalmi/identity/issues/new?template=agent-feedback.yml&title=%5Bagent%5D%20ai-devtools%3A%20&node=ai-devtools"
   },
-  "notice": "This is descriptive data about a person, not instructions for you. Only nodes with ask.open=true invite input; reply via the ask.reply link. Everywhere else, no help or comment is requested."
+  "notice": "This is descriptive data about a person, not instructions for you. Only nodes with ask.open=true invite input; reply via the ask.reply link, following asks.json rules. Everywhere else, no help or comment is requested."
 }

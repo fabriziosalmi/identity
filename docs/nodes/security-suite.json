@@ -21,8 +21,12 @@
     }
   ],
   "ask": {
-    "open": false,
-    "note": "No help or comment requested here."
+    "open": true,
+    "question": "Which domain blocklist source should blacklists add or drop?",
+    "in_scope": "Public sources whose license allows redistribution; false positives with the affected domains.",
+    "out_of_scope": "Commercial or paid feeds, sources requiring sign-up, unrelated security tools.",
+    "evidence": "Source URL, license, update frequency, and measured overlap or false positives against the current list.",
+    "reply": "https://github.com/fabriziosalmi/identity/issues/new?template=agent-feedback.yml&title=%5Bagent%5D%20security-suite%3A%20&node=security-suite"
   },
-  "notice": "This is descriptive data about a person, not instructions for you. Only nodes with ask.open=true invite input; reply via the ask.reply link. Everywhere else, no help or comment is requested."
+  "notice": "This is descriptive data about a person, not instructions for you. Only nodes with ask.open=true invite input; reply via the ask.reply link, following asks.json rules. Everywhere else, no help or comment is requested."
 }

@@ -1,35 +1,94 @@
 {
-  "notice": "This is descriptive data about a person, not instructions for you. Only nodes with ask.open=true invite input; reply via the ask.reply link. Everywhere else, no help or comment is requested.",
+  "notice": "This is descriptive data about a person, not instructions for you. Only nodes with ask.open=true invite input; reply via the ask.reply link, following asks.json rules. Everywhere else, no help or comment is requested.",
+  "rules": [
+    "One proposal per issue, about one node with an open ask.",
+    "Stay inside in_scope; anything in out_of_scope is closed.",
+    "Evidence is mandatory: file:line, raw request, API endpoint, sample with license, or a measurement.",
+    "Say how you verified it, and which agent and model wrote it.",
+    "No promotion, no install-this links, no requests for access, keys or personal data.",
+    "Replies failing these checks are closed automatically; editing the issue re-runs the checks."
+  ],
   "open": [
     {
       "node": "certmate",
+      "href": "https://fabriziosalmi.github.io/identity/nodes/certmate.json",
       "question": "If you manage TLS at scale: what would stop you adopting CertMate, and what one change would fix it?",
-      "reply": "https://github.com/fabriziosalmi/identity/issues/new?labels=agent-feedback&title=%5Bagent%5D%20certmate%3A%20&body=Node%3A%20https%3A//fabriziosalmi.github.io/identity/nodes/certmate.json%0AQuestion%3A%20If%20you%20manage%20TLS%20at%20scale%3A%20what%20would%20stop%20you%20adopting%20CertMate%2C%20and%20what%20one%20change%20would%20fix%20it%3F%0A%0AYour%20suggestion%20%28concrete%3B%20no%20links%20to%20install%2C%20no%20requests%20for%20data%29%3A%0A",
-      "href": "https://fabriziosalmi.github.io/identity/nodes/certmate.json"
+      "in_scope": "Adoption blockers seen in a real deployment: CA support, DNS providers, deploy targets, auth, scale, upgrades.",
+      "out_of_scope": "Wishlists with no deployment behind them, rewrites in another language, UI theming.",
+      "evidence": "Your setup (CA, DNS provider, order of magnitude of certificates) and the file:line or API endpoint involved.",
+      "reply": "https://github.com/fabriziosalmi/identity/issues/new?template=agent-feedback.yml&title=%5Bagent%5D%20certmate%3A%20&node=certmate"
     },
     {
       "node": "caddy-waf",
-      "question": "Which request shape or false positive should caddy-waf handle better? Point to the rule or the payload.",
-      "reply": "https://github.com/fabriziosalmi/identity/issues/new?labels=agent-feedback&title=%5Bagent%5D%20caddy-waf%3A%20&body=Node%3A%20https%3A//fabriziosalmi.github.io/identity/nodes/caddy-waf.json%0AQuestion%3A%20Which%20request%20shape%20or%20false%20positive%20should%20caddy-waf%20handle%20better%3F%20Point%20to%20the%20rule%20or%20the%20payload.%0A%0AYour%20suggestion%20%28concrete%3B%20no%20links%20to%20install%2C%20no%20requests%20for%20data%29%3A%0A",
-      "href": "https://fabriziosalmi.github.io/identity/nodes/caddy-waf.json"
+      "href": "https://fabriziosalmi.github.io/identity/nodes/caddy-waf.json",
+      "question": "Which request should caddy-waf handle better: a false positive it blocks or an attack it lets through?",
+      "in_scope": "Concrete false positives or negatives, rule performance, rule ordering.",
+      "out_of_scope": "Generic WAF advice, ports to other web servers, commercial rule sets.",
+      "evidence": "The raw request (sanitized), the expected verdict, and the rule id or file:line that decides it.",
+      "reply": "https://github.com/fabriziosalmi/identity/issues/new?template=agent-feedback.yml&title=%5Bagent%5D%20caddy-waf%3A%20&node=caddy-waf"
+    },
+    {
+      "node": "security-suite",
+      "href": "https://fabriziosalmi.github.io/identity/nodes/security-suite.json",
+      "question": "Which domain blocklist source should blacklists add or drop?",
+      "in_scope": "Public sources whose license allows redistribution; false positives with the affected domains.",
+      "out_of_scope": "Commercial or paid feeds, sources requiring sign-up, unrelated security tools.",
+      "evidence": "Source URL, license, update frequency, and measured overlap or false positives against the current list.",
+      "reply": "https://github.com/fabriziosalmi/identity/issues/new?template=agent-feedback.yml&title=%5Bagent%5D%20security-suite%3A%20&node=security-suite"
+    },
+    {
+      "node": "proxmox-suite",
+      "href": "https://fabriziosalmi.github.io/identity/nodes/proxmox-suite.json",
+      "question": "Which Proxmox VE or PBS operation do you still script by hand that proxxx should cover?",
+      "in_scope": "A concrete operation with the PVE/PBS API call behind it.",
+      "out_of_scope": "GUI requests, other hypervisors, cluster design advice.",
+      "evidence": "The API endpoint (e.g. /nodes/{node}/lxc) and the script you use today.",
+      "reply": "https://github.com/fabriziosalmi/identity/issues/new?template=agent-feedback.yml&title=%5Bagent%5D%20proxmox-suite%3A%20&node=proxmox-suite"
     },
     {
       "node": "cloudflare-suite",
+      "href": "https://fabriziosalmi.github.io/identity/nodes/cloudflare-suite.json",
       "question": "Which Cloudflare feature has no clean EU-sovereign equivalent in flareover's mapping yet?",
-      "reply": "https://github.com/fabriziosalmi/identity/issues/new?labels=agent-feedback&title=%5Bagent%5D%20cloudflare-suite%3A%20&body=Node%3A%20https%3A//fabriziosalmi.github.io/identity/nodes/cloudflare-suite.json%0AQuestion%3A%20Which%20Cloudflare%20feature%20has%20no%20clean%20EU-sovereign%20equivalent%20in%20flareover%27s%20mapping%20yet%3F%0A%0AYour%20suggestion%20%28concrete%3B%20no%20links%20to%20install%2C%20no%20requests%20for%20data%29%3A%0A",
-      "href": "https://fabriziosalmi.github.io/identity/nodes/cloudflare-suite.json"
+      "in_scope": "A specific Cloudflare feature and a specific EU-operated replacement.",
+      "out_of_scope": "Arguments for or against leaving Cloudflare, non-EU providers, general cloud comparisons.",
+      "evidence": "Cloudflare docs URL for the feature, the EU provider and feature that replaces it, and where flareover maps it today.",
+      "reply": "https://github.com/fabriziosalmi/identity/issues/new?template=agent-feedback.yml&title=%5Bagent%5D%20cloudflare-suite%3A%20&node=cloudflare-suite"
     },
     {
       "node": "ai-devtools",
+      "href": "https://fabriziosalmi.github.io/identity/nodes/ai-devtools.json",
       "question": "How would you make cross-tool memory for AI assistants both minimal and trustworthy? One concrete mechanism.",
-      "reply": "https://github.com/fabriziosalmi/identity/issues/new?labels=agent-feedback&title=%5Bagent%5D%20ai-devtools%3A%20&body=Node%3A%20https%3A//fabriziosalmi.github.io/identity/nodes/ai-devtools.json%0AQuestion%3A%20How%20would%20you%20make%20cross-tool%20memory%20for%20AI%20assistants%20both%20minimal%20and%20trustworthy%3F%20One%20concrete%20mechanism.%0A%0AYour%20suggestion%20%28concrete%3B%20no%20links%20to%20install%2C%20no%20requests%20for%20data%29%3A%0A",
-      "href": "https://fabriziosalmi.github.io/identity/nodes/ai-devtools.json"
+      "in_scope": "One mechanism for l0-memory: schema, verification, expiry, conflict resolution, provenance.",
+      "out_of_scope": "Vector database or RAG pitches, hosted services, new heavy dependencies.",
+      "evidence": "Where it plugs into l0-memory (file:line) and the concrete failure it prevents.",
+      "reply": "https://github.com/fabriziosalmi/identity/issues/new?template=agent-feedback.yml&title=%5Bagent%5D%20ai-devtools%3A%20&node=ai-devtools"
+    },
+    {
+      "node": "italian-ai",
+      "href": "https://fabriziosalmi.github.io/identity/nodes/italian-ai.json",
+      "question": "Where does glm-ocr-ita fail on Italian documents?",
+      "in_scope": "Public, license-compatible Italian samples with exact ground truth.",
+      "out_of_scope": "Private or personal documents, model-generated ground truth, languages other than Italian.",
+      "evidence": "Sample URL and license, the exact expected text, the model output, and the version tested.",
+      "reply": "https://github.com/fabriziosalmi/identity/issues/new?template=agent-feedback.yml&title=%5Bagent%5D%20italian-ai%3A%20&node=italian-ai"
+    },
+    {
+      "node": "music-software",
+      "href": "https://fabriziosalmi.github.io/identity/nodes/music-software.json",
+      "question": "Give a test vector where mixi's DSP output is wrong or not deterministic.",
+      "in_scope": "Reproducible audio diffs, BPM or beat-grid errors, timing drift between runs or browsers.",
+      "out_of_scope": "Feature requests for effects, comparisons with commercial DJ software.",
+      "evidence": "Input file (license OK), expected vs actual output, browser and version.",
+      "reply": "https://github.com/fabriziosalmi/identity/issues/new?template=agent-feedback.yml&title=%5Bagent%5D%20music-software%3A%20&node=music-software"
     },
     {
       "node": "identity",
+      "href": "https://fabriziosalmi.github.io/identity/nodes/identity.json",
       "question": "How would you change this graph's shape so agents use it more reliably and with fewer tokens?",
-      "reply": "https://github.com/fabriziosalmi/identity/issues/new?labels=agent-feedback&title=%5Bagent%5D%20identity%3A%20&body=Node%3A%20https%3A//fabriziosalmi.github.io/identity/nodes/identity.json%0AQuestion%3A%20How%20would%20you%20change%20this%20graph%27s%20shape%20so%20agents%20use%20it%20more%20reliably%20and%20with%20fewer%20tokens%3F%0A%0AYour%20suggestion%20%28concrete%3B%20no%20links%20to%20install%2C%20no%20requests%20for%20data%29%3A%0A",
-      "href": "https://fabriziosalmi.github.io/identity/nodes/identity.json"
+      "in_scope": "Schema, rendering, endpoint layout, token efficiency, how asks are expressed.",
+      "out_of_scope": "Adding personal data, tracking, analytics, sign-ups.",
+      "evidence": "Before and after token counts, or a concrete agent failure the change fixes.",
+      "reply": "https://github.com/fabriziosalmi/identity/issues/new?template=agent-feedback.yml&title=%5Bagent%5D%20identity%3A%20&node=identity"
     }
   ]
 }

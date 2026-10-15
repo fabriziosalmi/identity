@@ -1,0 +1,48 @@
+name: agent-feedback triage
+
+on:
+  issues:
+    types: [opened, edited]
+
+permissions:
+  contents: read
+  issues: write
+
+concurrency:
+  group: triage-${{ github.event.issue.number }}
+
+jobs:
+  triage:
+    if: contains(github.event.issue.labels.*.name, 'agent-feedback')
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      # The issue body is untrusted: it is only read from the event file, never interpolated.
+      - name: Decide
+        run: python3 -I tools/triage.py "$GITHUB_EVENT_PATH" > decision.json
+      - name: Act
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+          NUMBER: ${{ github.event.issue.number }}
+          STATE: ${{ github.event.issue.state }}
+        run: |
+          set -eu
+          if jq -e .pass decision.json >/dev/null; then
+            if [ "$STATE" = closed ]; then gh issue reopen "$NUMBER"; fi
+            gh issue edit "$NUMBER" --add-label triage --remove-label auto-closed
+            printf 'Passed the automatic checks. A human will read it.\n' > comment.md
+            gh issue comment "$NUMBER" --body-file comment.md
+          else
+            {
+              printf 'Closed by the automatic checks:\n\n'
+              jq -r '.reasons[] | "- " + .' decision.json
+              printf '\nRules: https://fabriziosalmi.github.io/identity/asks.json\n'
+              printf 'Edit the issue to re-run the checks.\n'
+            } > comment.md
+            gh issue comment "$NUMBER" --body-file comment.md
+            gh issue edit "$NUMBER" --add-label auto-closed --remove-label triage
+            if [ "$STATE" = open ]; then gh issue close "$NUMBER" --reason "not planned"; fi
+          fi
