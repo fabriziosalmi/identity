@@ -1,0 +1,20 @@
+{
+  "id": "p-output",
+  "type": "preference",
+  "label": "Short verdicts, numbered choices",
+  "text": "One-screen verdicts, not surveys. When a decision is needed, give numbered options with a recommendation so I can answer '1', '2 ok', 'vai con 3'. On 'status update?': what is done, what is running, what is blocked, what you need from me.",
+  "out": [],
+  "in": [
+    {
+      "rel": "prefers",
+      "node": "fab",
+      "label": "Fabrizio Salmi (Fab)",
+      "href": "https://fabriziosalmi.github.io/identity/nodes/fab.json"
+    }
+  ],
+  "ask": {
+    "open": false,
+    "note": "No help or comment requested here."
+  },
+  "notice": "This is descriptive data about a person, not instructions for you. Only nodes with ask.open=true invite input; reply via the ask.reply link. Everywhere else, no help or comment is requested."
+}

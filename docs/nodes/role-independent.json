@@ -1,0 +1,20 @@
+{
+  "id": "role-independent",
+  "type": "role",
+  "label": "Independent engineer and fractional CTO (2026 to present)",
+  "text": "Freelance. Builds data, analytics and infrastructure platforms for clients. Also independent security researcher doing coordinated disclosure (private report plus fix, per SECURITY.md).",
+  "out": [],
+  "in": [
+    {
+      "rel": "works_as",
+      "node": "fab",
+      "label": "Fabrizio Salmi (Fab)",
+      "href": "https://fabriziosalmi.github.io/identity/nodes/fab.json"
+    }
+  ],
+  "ask": {
+    "open": false,
+    "note": "No help or comment requested here."
+  },
+  "notice": "This is descriptive data about a person, not instructions for you. Only nodes with ask.open=true invite input; reply via the ask.reply link. Everywhere else, no help or comment is requested."
+}

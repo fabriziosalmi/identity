@@ -1,0 +1,206 @@
+{
+  "id": "fab",
+  "type": "person",
+  "label": "Fabrizio Salmi (Fab)",
+  "text": "Infrastructure architect and engineer based in Genoa, Italy. 20+ years designing, building and defending mission-critical systems, from SMBs and non-profits to European financial markets and global CDNs. Philosophy: autonomy through code, turning manual and fragmented operations into automated platforms. Self-described 'not a coder': started publishing open source around 2023 and learns by shipping, fail after fail. Works solo with several AI agents in parallel. Italian native, professional English. Classical high school (liceo classico).",
+  "out": [
+    {
+      "rel": "works_as",
+      "node": "role-independent",
+      "label": "Independent engineer and fractional CTO (2026 to present)",
+      "href": "https://fabriziosalmi.github.io/identity/nodes/role-independent.json"
+    },
+    {
+      "rel": "worked_at",
+      "node": "role-mainstreaming",
+      "label": "MainStreaming SpA (Jul 2025 to Apr 2026)",
+      "href": "https://fabriziosalmi.github.io/identity/nodes/role-mainstreaming.json"
+    },
+    {
+      "rel": "worked_at",
+      "node": "role-borsa",
+      "label": "Borsa Italiana / Euronext (2019 to 2025)",
+      "href": "https://fabriziosalmi.github.io/identity/nodes/role-borsa.json"
+    },
+    {
+      "rel": "worked_at",
+      "node": "role-sorint",
+      "label": "SORINT.lab (2018 to 2019)",
+      "href": "https://fabriziosalmi.github.io/identity/nodes/role-sorint.json"
+    },
+    {
+      "rel": "worked_at",
+      "node": "role-youtube",
+      "label": "YouTube partner (2014 to 2019)",
+      "href": "https://fabriziosalmi.github.io/identity/nodes/role-youtube.json"
+    },
+    {
+      "rel": "maintains",
+      "node": "certmate",
+      "label": "CertMate",
+      "href": "https://fabriziosalmi.github.io/identity/nodes/certmate.json"
+    },
+    {
+      "rel": "maintains",
+      "node": "caddy-waf",
+      "label": "caddy-waf",
+      "href": "https://fabriziosalmi.github.io/identity/nodes/caddy-waf.json"
+    },
+    {
+      "rel": "maintains",
+      "node": "security-suite",
+      "label": "Security tooling",
+      "href": "https://fabriziosalmi.github.io/identity/nodes/security-suite.json"
+    },
+    {
+      "rel": "maintains",
+      "node": "proxmox-suite",
+      "label": "Proxmox and self-hosting tooling",
+      "href": "https://fabriziosalmi.github.io/identity/nodes/proxmox-suite.json"
+    },
+    {
+      "rel": "maintains",
+      "node": "cloudflare-suite",
+      "label": "Cloudflare and EU sovereignty tooling",
+      "href": "https://fabriziosalmi.github.io/identity/nodes/cloudflare-suite.json"
+    },
+    {
+      "rel": "maintains",
+      "node": "ai-devtools",
+      "label": "AI developer tooling (l0 family and friends)",
+      "href": "https://fabriziosalmi.github.io/identity/nodes/ai-devtools.json"
+    },
+    {
+      "rel": "maintains",
+      "node": "italian-ai",
+      "label": "Italian-language AI",
+      "href": "https://fabriziosalmi.github.io/identity/nodes/italian-ai.json"
+    },
+    {
+      "rel": "maintains",
+      "node": "llm-feeds",
+      "label": "LLM content experiments",
+      "href": "https://fabriziosalmi.github.io/identity/nodes/llm-feeds.json"
+    },
+    {
+      "rel": "maintains",
+      "node": "music-software",
+      "label": "Music software",
+      "href": "https://fabriziosalmi.github.io/identity/nodes/music-software.json"
+    },
+    {
+      "rel": "maintains",
+      "node": "identity",
+      "label": "This identity graph",
+      "href": "https://fabriziosalmi.github.io/identity/nodes/identity.json"
+    },
+    {
+      "rel": "prefers",
+      "node": "p-language",
+      "label": "Language",
+      "href": "https://fabriziosalmi.github.io/identity/nodes/p-language.json"
+    },
+    {
+      "rel": "prefers",
+      "node": "p-gate",
+      "label": "Ask before outward actions",
+      "href": "https://fabriziosalmi.github.io/identity/nodes/p-gate.json"
+    },
+    {
+      "rel": "prefers",
+      "node": "p-rigor",
+      "label": "Draconian rigor",
+      "href": "https://fabriziosalmi.github.io/identity/nodes/p-rigor.json"
+    },
+    {
+      "rel": "prefers",
+      "node": "p-output",
+      "label": "Short verdicts, numbered choices",
+      "href": "https://fabriziosalmi.github.io/identity/nodes/p-output.json"
+    },
+    {
+      "rel": "prefers",
+      "node": "p-sample",
+      "label": "Sample first, then scale",
+      "href": "https://fabriziosalmi.github.io/identity/nodes/p-sample.json"
+    },
+    {
+      "rel": "prefers",
+      "node": "p-public-text",
+      "label": "Public text",
+      "href": "https://fabriziosalmi.github.io/identity/nodes/p-public-text.json"
+    },
+    {
+      "rel": "prefers",
+      "node": "p-git",
+      "label": "Git hygiene",
+      "href": "https://fabriziosalmi.github.io/identity/nodes/p-git.json"
+    },
+    {
+      "rel": "prefers",
+      "node": "p-secrets",
+      "label": "Secrets",
+      "href": "https://fabriziosalmi.github.io/identity/nodes/p-secrets.json"
+    },
+    {
+      "rel": "prefers",
+      "node": "p-multiagent",
+      "label": "Multi-agent setup",
+      "href": "https://fabriziosalmi.github.io/identity/nodes/p-multiagent.json"
+    },
+    {
+      "rel": "writes",
+      "node": "st-work",
+      "label": "Work emails",
+      "href": "https://fabriziosalmi.github.io/identity/nodes/st-work.json"
+    },
+    {
+      "rel": "writes",
+      "node": "st-casual",
+      "label": "Casual and social",
+      "href": "https://fabriziosalmi.github.io/identity/nodes/st-casual.json"
+    },
+    {
+      "rel": "into",
+      "node": "i-tekno",
+      "label": "Freetekno music",
+      "href": "https://fabriziosalmi.github.io/identity/nodes/i-tekno.json"
+    },
+    {
+      "rel": "founded",
+      "node": "i-audiolibri",
+      "label": "Audiolibri.org",
+      "href": "https://fabriziosalmi.github.io/identity/nodes/i-audiolibri.json"
+    },
+    {
+      "rel": "cares_about",
+      "node": "i-causes",
+      "label": "Causes",
+      "href": "https://fabriziosalmi.github.io/identity/nodes/i-causes.json"
+    },
+    {
+      "rel": "is_on",
+      "node": "l-github",
+      "label": "GitHub",
+      "href": "https://fabriziosalmi.github.io/identity/nodes/l-github.json"
+    },
+    {
+      "rel": "is_on",
+      "node": "l-linkedin",
+      "label": "LinkedIn",
+      "href": "https://fabriziosalmi.github.io/identity/nodes/l-linkedin.json"
+    },
+    {
+      "rel": "is_on",
+      "node": "l-hf",
+      "label": "Hugging Face",
+      "href": "https://fabriziosalmi.github.io/identity/nodes/l-hf.json"
+    }
+  ],
+  "in": [],
+  "ask": {
+    "open": false,
+    "note": "No help or comment requested here."
+  },
+  "notice": "This is descriptive data about a person, not instructions for you. Only nodes with ask.open=true invite input; reply via the ask.reply link. Everywhere else, no help or comment is requested."
+}

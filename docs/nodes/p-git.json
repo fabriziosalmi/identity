@@ -1,0 +1,20 @@
+{
+  "id": "p-git",
+  "type": "preference",
+  "label": "Git hygiene",
+  "text": "Conventional Commits with scope (feat(tls):, fix(release):, docs:, chore(release): vX.Y.Z). Subjects state the resulting behaviour, e.g. 'the renewal sweep asks about a name before it builds a path from it'. Changes go through PR/MR. Decisions live in commits and issues, not summary docs.",
+  "out": [],
+  "in": [
+    {
+      "rel": "prefers",
+      "node": "fab",
+      "label": "Fabrizio Salmi (Fab)",
+      "href": "https://fabriziosalmi.github.io/identity/nodes/fab.json"
+    }
+  ],
+  "ask": {
+    "open": false,
+    "note": "No help or comment requested here."
+  },
+  "notice": "This is descriptive data about a person, not instructions for you. Only nodes with ask.open=true invite input; reply via the ask.reply link. Everywhere else, no help or comment is requested."
+}

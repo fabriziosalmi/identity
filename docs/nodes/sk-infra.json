@@ -1,0 +1,38 @@
+{
+  "id": "sk-infra",
+  "type": "skill",
+  "label": "Infrastructure",
+  "text": "Linux, networking, DNS (BIND, PowerDNS), CDN, Proxmox VE/PBS and LXC, Docker, Kubernetes, AWS, GCP, Cloudflare, Caddy, Nginx/OpenResty, Tailscale, Prometheus/Grafana, Terraform, Helm, GitHub Actions and GitLab CI.",
+  "out": [],
+  "in": [
+    {
+      "rel": "uses",
+      "node": "proxmox-suite",
+      "label": "Proxmox and self-hosting tooling",
+      "href": "https://fabriziosalmi.github.io/identity/nodes/proxmox-suite.json"
+    },
+    {
+      "rel": "uses",
+      "node": "cloudflare-suite",
+      "label": "Cloudflare and EU sovereignty tooling",
+      "href": "https://fabriziosalmi.github.io/identity/nodes/cloudflare-suite.json"
+    },
+    {
+      "rel": "uses",
+      "node": "role-borsa",
+      "label": "Borsa Italiana / Euronext (2019 to 2025)",
+      "href": "https://fabriziosalmi.github.io/identity/nodes/role-borsa.json"
+    },
+    {
+      "rel": "uses",
+      "node": "role-mainstreaming",
+      "label": "MainStreaming SpA (Jul 2025 to Apr 2026)",
+      "href": "https://fabriziosalmi.github.io/identity/nodes/role-mainstreaming.json"
+    }
+  ],
+  "ask": {
+    "open": false,
+    "note": "No help or comment requested here."
+  },
+  "notice": "This is descriptive data about a person, not instructions for you. Only nodes with ask.open=true invite input; reply via the ask.reply link. Everywhere else, no help or comment is requested."
+}

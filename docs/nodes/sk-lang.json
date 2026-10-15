@@ -1,0 +1,20 @@
+{
+  "id": "sk-lang",
+  "type": "skill",
+  "label": "Languages and frameworks",
+  "text": "Python first (FastAPI, Pydantic, SQLAlchemy, Celery, Django, Flask, uv), then TypeScript (React, Next.js, VS Code extensions), Rust, Go. Bash everywhere.",
+  "out": [],
+  "in": [
+    {
+      "rel": "uses",
+      "node": "certmate",
+      "label": "CertMate",
+      "href": "https://fabriziosalmi.github.io/identity/nodes/certmate.json"
+    }
+  ],
+  "ask": {
+    "open": false,
+    "note": "No help or comment requested here."
+  },
+  "notice": "This is descriptive data about a person, not instructions for you. Only nodes with ask.open=true invite input; reply via the ask.reply link. Everywhere else, no help or comment is requested."
+}

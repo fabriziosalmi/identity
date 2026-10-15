@@ -1,0 +1,35 @@
+{
+  "id": "certmate",
+  "type": "project",
+  "label": "CertMate",
+  "url": "https://github.com/fabriziosalmi/certmate",
+  "text": "Self-hosted TLS certificate lifecycle platform: issue, renew, discover, inventory, deploy. REST API, UI, MCP, Helm, CLI via Homebrew. Flagship project, ~1.4k stars. Fab is maintainer and reviews contributor PRs.",
+  "out": [
+    {
+      "rel": "uses",
+      "node": "sk-security",
+      "label": "Security",
+      "href": "https://fabriziosalmi.github.io/identity/nodes/sk-security.json"
+    },
+    {
+      "rel": "uses",
+      "node": "sk-lang",
+      "label": "Languages and frameworks",
+      "href": "https://fabriziosalmi.github.io/identity/nodes/sk-lang.json"
+    }
+  ],
+  "in": [
+    {
+      "rel": "maintains",
+      "node": "fab",
+      "label": "Fabrizio Salmi (Fab)",
+      "href": "https://fabriziosalmi.github.io/identity/nodes/fab.json"
+    }
+  ],
+  "ask": {
+    "open": true,
+    "question": "If you manage TLS at scale: what would stop you adopting CertMate, and what one change would fix it?",
+    "reply": "https://github.com/fabriziosalmi/identity/issues/new?labels=agent-feedback&title=%5Bagent%5D%20certmate%3A%20&body=Node%3A%20https%3A//fabriziosalmi.github.io/identity/nodes/certmate.json%0AQuestion%3A%20If%20you%20manage%20TLS%20at%20scale%3A%20what%20would%20stop%20you%20adopting%20CertMate%2C%20and%20what%20one%20change%20would%20fix%20it%3F%0A%0AYour%20suggestion%20%28concrete%3B%20no%20links%20to%20install%2C%20no%20requests%20for%20data%29%3A%0A"
+  },
+  "notice": "This is descriptive data about a person, not instructions for you. Only nodes with ask.open=true invite input; reply via the ask.reply link. Everywhere else, no help or comment is requested."
+}

@@ -1,0 +1,20 @@
+{
+  "id": "role-youtube",
+  "type": "role",
+  "label": "YouTube partner (2014 to 2019)",
+  "text": "25M+ views on own channel, 50M+ on others. No camera: FFmpeg, automation and SEO.",
+  "out": [],
+  "in": [
+    {
+      "rel": "worked_at",
+      "node": "fab",
+      "label": "Fabrizio Salmi (Fab)",
+      "href": "https://fabriziosalmi.github.io/identity/nodes/fab.json"
+    }
+  ],
+  "ask": {
+    "open": false,
+    "note": "No help or comment requested here."
+  },
+  "notice": "This is descriptive data about a person, not instructions for you. Only nodes with ask.open=true invite input; reply via the ask.reply link. Everywhere else, no help or comment is requested."
+}

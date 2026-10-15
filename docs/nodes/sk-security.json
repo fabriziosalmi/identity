@@ -1,0 +1,38 @@
+{
+  "id": "sk-security",
+  "type": "skill",
+  "label": "Security",
+  "text": "WAF, DDoS defence, TLS/PKI and ACME, perimeter security, SIEM/SOAR, DLP, supply chain (gitleaks, Dependabot, SLSA provenance, pinned digests), NIS2, coordinated disclosure.",
+  "out": [],
+  "in": [
+    {
+      "rel": "uses",
+      "node": "certmate",
+      "label": "CertMate",
+      "href": "https://fabriziosalmi.github.io/identity/nodes/certmate.json"
+    },
+    {
+      "rel": "uses",
+      "node": "caddy-waf",
+      "label": "caddy-waf",
+      "href": "https://fabriziosalmi.github.io/identity/nodes/caddy-waf.json"
+    },
+    {
+      "rel": "uses",
+      "node": "security-suite",
+      "label": "Security tooling",
+      "href": "https://fabriziosalmi.github.io/identity/nodes/security-suite.json"
+    },
+    {
+      "rel": "uses",
+      "node": "role-borsa",
+      "label": "Borsa Italiana / Euronext (2019 to 2025)",
+      "href": "https://fabriziosalmi.github.io/identity/nodes/role-borsa.json"
+    }
+  ],
+  "ask": {
+    "open": false,
+    "note": "No help or comment requested here."
+  },
+  "notice": "This is descriptive data about a person, not instructions for you. Only nodes with ask.open=true invite input; reply via the ask.reply link. Everywhere else, no help or comment is requested."
+}

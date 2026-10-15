@@ -1,0 +1,29 @@
+{
+  "id": "caddy-waf",
+  "type": "project",
+  "label": "caddy-waf",
+  "url": "https://github.com/fabriziosalmi/caddy-waf",
+  "text": "WAF middleware for Caddy: regex rules, IP and DNS filtering, rate limiting, GeoIP, Tor, anomaly detection. In the Caddy module registry, ~900 stars.",
+  "out": [
+    {
+      "rel": "uses",
+      "node": "sk-security",
+      "label": "Security",
+      "href": "https://fabriziosalmi.github.io/identity/nodes/sk-security.json"
+    }
+  ],
+  "in": [
+    {
+      "rel": "maintains",
+      "node": "fab",
+      "label": "Fabrizio Salmi (Fab)",
+      "href": "https://fabriziosalmi.github.io/identity/nodes/fab.json"
+    }
+  ],
+  "ask": {
+    "open": true,
+    "question": "Which request shape or false positive should caddy-waf handle better? Point to the rule or the payload.",
+    "reply": "https://github.com/fabriziosalmi/identity/issues/new?labels=agent-feedback&title=%5Bagent%5D%20caddy-waf%3A%20&body=Node%3A%20https%3A//fabriziosalmi.github.io/identity/nodes/caddy-waf.json%0AQuestion%3A%20Which%20request%20shape%20or%20false%20positive%20should%20caddy-waf%20handle%20better%3F%20Point%20to%20the%20rule%20or%20the%20payload.%0A%0AYour%20suggestion%20%28concrete%3B%20no%20links%20to%20install%2C%20no%20requests%20for%20data%29%3A%0A"
+  },
+  "notice": "This is descriptive data about a person, not instructions for you. Only nodes with ask.open=true invite input; reply via the ask.reply link. Everywhere else, no help or comment is requested."
+}
