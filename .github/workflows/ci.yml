@@ -15,8 +15,15 @@ jobs:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           persist-credentials: false
-      - name: Triage tests
-        run: python3 -I tools/test_triage.py
+      - name: Local-only files are never tracked
+        run: |
+          if git ls-files | grep -qiE '^(IDENTITY\.md|graph\.local\.json|\.IDENTITY\.md\.sha256)$'; then
+            echo "a local-only file is tracked"; exit 1
+          fi
+      - name: Tests
+        run: |
+          python3 -I tools/test_build.py
+          python3 -I tools/test_triage.py
       - name: Build (validates graph, refuses secret-like content)
         run: python3 -I build.py
       - name: docs/ matches the sources

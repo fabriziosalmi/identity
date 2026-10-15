@@ -15,6 +15,7 @@ Outputs:
   IDENTITY.md       public + local rendered (git-ignored), symlinked into
                     ~/.claude, ~/.gemini, ~/.codex, ~/.config/opencode
 """
+import hashlib
 import json
 import re
 import sys
@@ -77,6 +78,9 @@ def load():
         loc = json.loads(LOCAL.read_text())
         for n in loc["nodes"]:
             n["visibility"] = "local"
+        # Local edges stay local even between two public nodes.
+        for e in loc["edges"]:
+            e["local"] = True
         g["nodes"] += loc["nodes"]
         g["edges"] += loc["edges"]
     seen = set()
@@ -99,18 +103,30 @@ def public(g):
         for n in g["nodes"] if n["visibility"] == "public"
     ]
     ids = {n["id"] for n in nodes}
-    edges = [e for e in g["edges"] if e["from"] in ids and e["to"] in ids]
+    edges = [e for e in g["edges"]
+             if not e.get("local") and e["from"] in ids and e["to"] in ids]
     return {**g, "nodes": nodes, "edges": edges}
 
 
-def scan(text):
-    hits = [why for pat, why in DENY if re.search(pat, text)]
+PUBLIC_ONLY = {"IP address", "email address", "internal host", "em dash (public text style)"}
+
+
+def scan(text, public=True):
+    """Exit on anything secret-like. The local file goes to every AI provider
+    the linked tools use, so it gets the secret checks too; the rules that
+    only protect the public output (hosts, addresses, style) are skipped."""
+    deny = DENY if public else [(p, w) for p, w in DENY if w not in PUBLIC_ONLY]
+    hits = [why for pat, why in deny if re.search(pat, text)]
     # Phone-like: a run of 9+ digits with separators.
     for m in re.finditer(r"\+?\d[\d\s().-]{7,}\d", text):
         if sum(c.isdigit() for c in m.group()) >= 9:
             hits.append("phone-like number")
     if hits:
         sys.exit(f"refusing to publish, found: {', '.join(sorted(set(hits)))}")
+
+
+def node_url(node_id):
+    return f"{BASE_URL}/nodes/{node_id}.json"
 
 
 def ask_for(n):
@@ -131,7 +147,7 @@ def node_doc(n, g):
 
     def rel(e, k):
         return {"rel": e["rel"], "node": e[k], "label": by_id[e[k]]["label"],
-                "href": f"{BASE_URL}/nodes/{e[k]}.json"}
+                "href": node_url(e[k])}
 
     return {
         **{k: v for k, v in n.items() if k != "ask"},
@@ -173,18 +189,31 @@ def render(g, with_asks):
                     f"  - In scope: {a['in_scope']}",
                     f"  - Out of scope: {a['out_of_scope']}",
                     f"  - Evidence: {a['evidence']}",
-                    f"  - Reply: {BASE_URL}/nodes/{n['id']}.json"]
+                    f"  - Reply: {node_url(n['id'])}"]
         out += ["", "Rules for replies:", ""] + [f"{i}. {r}" for i, r in enumerate(RULES, 1)]
         out.append("")
     out.append(f"_Graph: {BASE_URL}/graph.json, updated {m['updated']}_")
     return "\n".join(out) + "\n"
 
 
+def write_local(text):
+    """IDENTITY.md is linked as each tool's global memory, so a tool may write
+    to it. Refuse to overwrite such edits silently."""
+    out, stamp = ROOT / "IDENTITY.md", ROOT / ".IDENTITY.md.sha256"
+    digest = lambda t: hashlib.sha256(t.encode()).hexdigest()
+    if out.exists() and stamp.exists() and digest(out.read_text()) != stamp.read_text().strip():
+        sys.exit("IDENTITY.md was edited after the last build (by you or an AI tool "
+                 "saving to its global memory). Move the change into graph.json or "
+                 "graph.local.json, delete IDENTITY.md, then rebuild.")
+    out.write_text(text)
+    stamp.write_text(digest(text) + "\n")
+
+
 def main():
     g = load()
     pub = public(g)
     docs = {n["id"]: node_doc(n, pub) for n in pub["nodes"]}
-    asks = [{"node": i, "href": f"{BASE_URL}/nodes/{i}.json",
+    asks = [{"node": i, "href": node_url(i),
              **{k: v for k, v in d["ask"].items() if k != "open"}}
             for i, d in docs.items() if d["ask"]["open"]]
 
@@ -212,9 +241,11 @@ def main():
         f"- [Identity (markdown)]({BASE_URL}/identity.md): read this as user context\n"
         f"- [Identity graph (JSON)]({BASE_URL}/graph.json): nodes and edges, same content\n"
         f"- [Open asks]({BASE_URL}/asks.json): where input is welcome, and how to reply\n"
-        f"- Per node: {BASE_URL}/nodes/<id>.json (ask.open=false means no comment wanted)\n"
+        f"- Per node: {node_url('<id>')} (ask.open=false means no comment wanted)\n"
     )
-    (ROOT / "IDENTITY.md").write_text(render(g, with_asks=False))
+    local_md = render(g, with_asks=False)
+    scan(local_md, public=False)
+    write_local(local_md)
     print(f"ok: {len(pub['nodes'])} public + {len(g['nodes']) - len(pub['nodes'])} local nodes, "
           f"{len(pub['edges'])} public edges, {len(asks)} open asks")
 
